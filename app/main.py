@@ -13,7 +13,7 @@ def uploader():
         return redirect(request.url)
 
     temp_filename = write_yaml_file(request.files['pdf_file'])
-    file_path = f'{os.path.abspath(os.getcwd())}/{temp_filename}.yaml'
+    file_path = f'{os.path.abspath(os.getcwd())}/{temp_filename}.yml'
     @after_this_request
     def remove_file(response):
         try:
@@ -21,7 +21,7 @@ def uploader():
         except Exception:
              logging.exception("Error removing or closing downloaded file handle")
         return response
-    return send_file(file_path, attachment_filename = f'{re.sub(".pdf", "", input_filename)}.yaml', as_attachment = True)
+    return send_file(file_path, attachment_filename = f'{re.sub(".pdf", "", input_filename)}.yml', as_attachment = True)
 
 def write_yaml_file(pdf_file):
     pdfReader = PyPDF2.PdfFileReader(pdf_file)
@@ -38,7 +38,7 @@ def write_yaml_file(pdf_file):
     for key in pdfReader.getFields().keys():
       dict_file[str(key)] = dict(field_default)
 
-    with open(f'{os.path.abspath(os.getcwd())}/{temp_filename}.yaml', 'w') as file:
+    with open(f'{os.path.abspath(os.getcwd())}/{temp_filename}.yml', 'w') as file:
        yaml.dump(dict_file, file)
 
     return temp_filename
