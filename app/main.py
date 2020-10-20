@@ -38,12 +38,12 @@ def write_yaml_file(pdf_file):
     file = open(f'{os.path.abspath(os.getcwd())}/{temp_filename}.yml', 'w') 
     for key in pdfReader.getFields().keys():
       file.write(f'{str(key)}: \n')
-      file.write("fill_in: ")
+      file.write("  fill_in: ")
       file.write(f'{str(field_default["fill_in"])} \n')
-      file.write("prefix: ")
+      file.write("  prefix: ")
       file.write(f'{str(field_default["prefix"])} \n')
-      file.write("province: ")
+      file.write("  province: ")
       file.write(f'{str(field_default["province"])} \n')
-      file.close() 
-
-    return file
+    
+    file.close()
+    return temp_filename
