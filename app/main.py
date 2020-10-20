@@ -1,5 +1,5 @@
 from flask import Flask, request, after_this_request, send_file, flash, redirect
-import logging, secrets, PyPDF2, yaml, os, re, array
+import logging, secrets, PyPDF2, yaml, os, re
 
 app = Flask(__name__)
 
@@ -30,7 +30,7 @@ def write_yaml_file(pdf_file):
     dict_file = {}
     field_default = {
       "fill_in": "{var}",
-      "prefix":  array(['i', []]),
+      "prefix": [''],
       "province": "",
     }
     
