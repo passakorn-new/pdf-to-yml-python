@@ -28,17 +28,22 @@ def write_yaml_file(pdf_file):
     temp_filename = secrets.token_hex(10)
 
     dict_file = {}
-    default_prefix = ['sub_district', 'district', 'floor', 'month', 'year']
+    default_prefix = ["sub_district", "district", "floor", "month", "year"]
     field_default = {
-      "fill_in": "{var}",
-      "prefix": list(default_prefix),
-      "province": "",
+      "fill_in": "\"{var}\"",
+      "prefix": default_prefix,
+      "province": "\"\"",
     }
     
+    file = open(f'{os.path.abspath(os.getcwd())}/{temp_filename}.yml', 'w') 
     for key in pdfReader.getFields().keys():
-      dict_file[str(key)] = dict(field_default)
+      file.write(f'{str(key)}: \n')
+      file.write("fill_in: ")
+      file.write(f'{str(field_default["fill_in"])} \n')
+      file.write("prefix: ")
+      file.write(f'{str(field_default["prefix"])} \n')
+      file.write("province: ")
+      file.write(f'{str(field_default["province"])} \n')
+      file.close() 
 
-    with open(f'{os.path.abspath(os.getcwd())}/{temp_filename}.yml', 'w') as file:
-       yaml.dump(dict_file, file, default_flow_style=False)
-
-    return temp_filename
+    return file
