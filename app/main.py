@@ -30,7 +30,7 @@ def write_yaml_file(pdf_file):
     dict_file = {}
     field_default = {
       "fill_in": "{var}",
-      "prefix": str([]),
+      "prefix": len([]),
       "province": "",
     }
     
