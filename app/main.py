@@ -1,5 +1,5 @@
 from flask import Flask, request, after_this_request, send_file, flash, redirect
-import logging, secrets, PyPDF2, yaml, os, re
+import logging, secrets, PyPDF2, yaml, os, re, array
 
 app = Flask(__name__)
 
@@ -30,7 +30,7 @@ def write_yaml_file(pdf_file):
     dict_file = {}
     field_default = {
       "fill_in": "{var}",
-      "prefix": None ,
+      "prefix":  array(['i', []]),
       "province": "",
     }
     
@@ -38,6 +38,6 @@ def write_yaml_file(pdf_file):
       dict_file[str(key)] = dict(field_default)
 
     with open(f'{os.path.abspath(os.getcwd())}/{temp_filename}.yml', 'w') as file:
-       yaml.dump(dict_file, file)
+       yaml.dump(dict_file, file, default_flow_style=False)
 
     return temp_filename
