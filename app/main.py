@@ -28,9 +28,10 @@ def write_yaml_file(pdf_file):
     temp_filename = secrets.token_hex(10)
 
     dict_file = {}
+    default_prefix = ['sub_district', 'district', 'floor', 'month', 'year']
     field_default = {
       "fill_in": "{var}",
-      "prefix": [''],
+      "prefix": list(default_prefix),
       "province": "",
     }
     
